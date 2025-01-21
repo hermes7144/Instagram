@@ -9,6 +9,7 @@ import NewIcon from './ui/icons/NewIcon';
 import NewFillIcon from './ui/icons/NewFillIcon';
 import ColorButton from './ui/ColorButton';
 import { useSession, signIn, signOut } from "next-auth/react"
+import Avatar from './ui/Avatar';
 
 const menu = [
   {
@@ -25,7 +26,10 @@ const menu = [
 export default function Navbar() {
   const pathname = usePathname();
   const { data: session } = useSession();
-
+  
+  const user = session?.user;
+  const username = session?.user?.email?.split("@")[0];
+  
   return (
     <header className='flex justify-between items-center px-6'>
       <h1 className='text-3xl font-bold'>InstantGram</h1>
@@ -38,9 +42,16 @@ export default function Navbar() {
           </Link>
           </li>
         ))}
-        {session ? (
-          <ColorButton text='Sign out' onClick={() => signOut()} />
-        ):(<ColorButton text='Sign in' onClick={() => signIn()} />)}
+        {user && <li>
+          <Link href={`/user/${username}`}>
+          <Avatar image={user?.image} size='small' highlight />
+          </Link>
+          </li>}
+          <li>
+            {session ? (
+            <ColorButton text='Sign out' onClick={() => signOut()} />
+          ):(<ColorButton text='Sign in' onClick={() => signIn()} />)}
+          </li>
         </ul>
       </nav>
     </header>
