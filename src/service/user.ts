@@ -31,6 +31,4 @@ export async function getUserByUsername(username: string) {
       "bookmarks":bookmarks[]->_id
     }`
   )
-  
 }
-

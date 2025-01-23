@@ -32,8 +32,10 @@ export default function Navbar() {
   
   return (
     <header className='flex justify-between items-center px-6'>
-      <h1 className='text-3xl font-bold'>InstantGram</h1>
-      <nav className=''>
+      <Link href='/'>
+        <h1 className='text-3xl font-bold'>Instantgram</h1>
+      </Link>
+      <nav>
         <ul className='flex items-center gap-4 p-4'>
         {menu.map(item => (
           <li key={item.href}>
