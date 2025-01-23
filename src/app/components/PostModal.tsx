@@ -11,9 +11,10 @@ export default function PostModal({ onClose, children}: Props) {
     if (event.target === event.target) {
       onClose();
     }
+  }}>
     <button className='fixed top-0 right-0 p-8 text-white' onClick={() => onClose()}>
       <CloseIcon />
     </button>
     {children}
-  }}></section>;
+  </section>;
 }
