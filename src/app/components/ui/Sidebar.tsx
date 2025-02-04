@@ -2,10 +2,10 @@
 
 import React from 'react';
 import Avatar from './Avatar';
-import { User } from '@/model/user';
+import { AuthUser } from '@/model/user';
 
 type Props ={
-  user: User;
+  user: AuthUser;
 }
 
  export default function Sidebar({user : {name, email, image}}: Props) {
@@ -13,7 +13,7 @@ type Props ={
 
   return <>
     <div className='flex items-center'>
-      {image && <Avatar image={image} size={'normal'} />}
+      {image && <Avatar image={image} size={'medium'} />}
         <div className='ml-4'>
           <p className='font-bold'>{username}</p>
           <p className='text-lg text-neutral-500 leading-4'>{name}</p>
