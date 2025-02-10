@@ -15,17 +15,19 @@ export default async function Page({ params: { username } }: Props) {
     notFound();
   }
 
-  return <section className='w-full'>
-   <UserProfile user={user} />
-   <UserPosts user={user} />
-  </section>;
+  return (
+    <section className='w-full'>
+      <UserProfile user={user} />
+      <UserPosts user={user} />
+    </section>
+  );
 }
 
-export async function generateMetadata({ params: { username } }: Props) : Promise<Metadata> {
+export async function generateMetadata({ params: { username } }: Props): Promise<Metadata> {
   const user = await getUser(username);
 
   return {
     title: `${user?.name} (@${user?.username}) • Instantgram Photos`,
-    description: `${user?.name}'s all Instantgram posts`
-  }
+    description: `${user?.name}'s all Instantgram posts`,
+  };
 }

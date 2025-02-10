@@ -1,8 +1,9 @@
 export type AuthUser = {
-  name?: string | null;
-  email?: string | null;
-  image?: string | null;
-  username?: string | null;
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  username: string;
 }
 
 export type SimpleUser = Pick<AuthUser, 'username' | 'image'>;
