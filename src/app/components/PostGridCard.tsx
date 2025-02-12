@@ -29,7 +29,7 @@ export default function PostGridCard({ post, priority = false }: Props) {
       {openModal && (
         <ModalPortal>
           <PostModal onClose={() => setOpenModal(false)}>
-            <PostDetail post={post} />
+            <PostDetail post={post}/>
           </PostModal>
         </ModalPortal>
       )}

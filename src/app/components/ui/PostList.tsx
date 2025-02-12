@@ -2,10 +2,10 @@
 
 import PostListCard from '../PostListCard';
 import GridSpninner from './GridSpninner';
-import UsePosts from '@/hooks/posts';
+import usePosts from '@/hooks/posts';
 
 export default function PostList() {
-  const { posts, isLoading: loading, error } = UsePosts();
+  const { posts, isLoading: loading, error } = usePosts();
  
   return <section>
     {loading && <div className='text-center mt-32'><GridSpninner /></div>}

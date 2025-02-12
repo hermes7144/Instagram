@@ -36,6 +36,8 @@ export async function getPost(id: string) {
 }
 
 export async function getPostsOf(username: string) {
+  console.log('getPostsOf');
+
   return client.fetch(
     `*[_type == "post" && author->username == "${username}"]
       | order(_createdAt desc){
@@ -54,6 +56,9 @@ export async function getLikedPostsOf(username: string) {
 }
 
 export async function getSavedPostsOf(username: string) {
+  console.log('getSavedPostsOf');
+
+
   return client.fetch(
     `*[_type == "post" && _id in *[_type == "user" && username =="${username}"].bookmarks[]._ref]
       | order(_createdAt desc){
@@ -85,4 +90,16 @@ export async function dislikePost(postId: string, userId: string) {
   return client.patch(postId)
   .unset([`likes[_ref=="${userId}"]`])
   .commit();
+}
+
+export async function addComment(postId: string, userId: string, comment: string) {
+  return client.patch(postId) //
+    .setIfMissing({ comments: []})
+    .append('comments', [
+      {
+        comment,
+        author: { _ref: userId, _type: 'reference' },
+      }
+    ])
+    .commit({ autoGenerateArrayKeys: true})
 }
