@@ -2,17 +2,14 @@ import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { authOptions } from '../auth/[...nextauth]/route';
 import { addBookmark, removeBookmark } from '@/service/user';
+import { withSessionUser } from '@/app/util/session';
 
 export async function PUT(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  const user = session?.user;
-
-  if (!user) {
-    return new Response('Authntication Error', { status: 401 });
-  }
+  return withSessionUser(async (user) => {
+    
   const { id, bookmark } = await req.json();
 
-  if (!id || bookmark === undefined) {
+  if (!id || bookmark == null) {
     return new Response('Bad Request', { status: 400 });
   }
 
@@ -21,4 +18,5 @@ export async function PUT(req: NextRequest) {
   return request(id, user.id)
   .then(res => NextResponse.json(res))
   .catch(error => new Response(JSON.stringify(error) , {status: 500}))
+  })
 }
