@@ -13,13 +13,13 @@ import Avatar from './ui/Avatar';
 
 const menu = [
   {
-    href: '/', icon: <HomeIcon />, clickedIcon: <HomeFillIcon />, 
+    href: '/', icon: <HomeIcon />, clickedIcon: <HomeFillIcon />, title: 'Home' 
   },
   {
-    href: '/search', icon: <SearchIcon />, clickedIcon: <SearchFillIcon />, 
+    href: '/search', icon: <SearchIcon />, clickedIcon: <SearchFillIcon />, title: 'Search users' 
   },
   {
-    href: '/new', icon: <NewIcon />, clickedIcon: <NewFillIcon />, 
+    href: '/new', icon: <NewIcon />, clickedIcon: <NewFillIcon />, title: 'New post'
   }
 ]
 
@@ -32,15 +32,15 @@ export default function Navbar() {
   
   return (
     <header className='flex justify-between items-center px-6'>
-      <Link href='/'>
+      <Link href='/' aria-label='Home'>
         <h1 className='text-3xl font-bold'>Instantgram</h1>
       </Link>
       <nav>
         <ul className='flex items-center gap-4 p-4'>
-        {menu.map(item => (
-          <li key={item.href}>
-            <Link href={item.href}>
-            {item.href === pathname ? item.clickedIcon : item.icon }
+        {menu.map(({ href, icon, clickedIcon, title}) => (
+          <li key={href}>
+            <Link href={href} aria-label={title}>
+            {href === pathname ? clickedIcon : icon }
           </Link>
           </li>
         ))}
